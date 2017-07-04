@@ -1086,7 +1086,7 @@ public class Equipment extends AppCompatActivity
         }
     }
 
-    public void onClickAddFish(View view)
+    public void onClickAddFish(View view) //temporary button for tests
     {
         meatAmount = 10;
         isFishMeat = true;
