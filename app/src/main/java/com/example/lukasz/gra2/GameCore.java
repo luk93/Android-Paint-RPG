@@ -108,7 +108,7 @@ public class GameCore extends AppCompatActivity
         locationList.add("Jezioro2"); //10
         locationList.add("DrogaGory");//11
 
-        //fishList nazw przedmiotow
+        //lista nazw przedmiotow
         itemNameList.add("Nic"); //0
         itemNameList.add("Kij"); //1
         itemNameList.add("Laczki"); //2
