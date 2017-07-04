@@ -680,7 +680,7 @@ public class GameCore extends AppCompatActivity
         }
     }
 
-    public void onDrop(View view)
+    public void onDrop(View view) //temporary button for testing EQ
     {
         rollEq(0, 22, 40);
     }
