@@ -157,7 +157,7 @@ public class CampFire extends AppCompatActivity
         setResult(RESULT_OK, campFireOver);
         finish();
     }
-    public void onClick(View view)
+    public void onClick(View view) //temporary button
     {
         tv2.setText("Overall: "+String.valueOf(timeOverall)+" Time 1: "+String.valueOf(timeTemp1)+" Time 2:"+String.valueOf(timeTemp2));
     }
