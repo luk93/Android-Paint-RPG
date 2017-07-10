@@ -117,7 +117,7 @@ public class Fishing extends AppCompatActivity implements SensorEventListener
 
         fishAnim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.appearin_scale);
 
-        //charList ryb: Character(String name, int lvl, int hp, int exp, int wrog)
+        //lista ryb: Character(String name, int lvl, int hp, int exp, int wrog)
         fishList.add(new Character("But", 0, 1, 0, 1));       //0-
         fishList.add(new Character("Wodorosty", 0, 1, 0, 1));       //1-
         fishList.add(new Character("Stara Sieć Rybacka", 0, 1, 0, 1)); //2-
