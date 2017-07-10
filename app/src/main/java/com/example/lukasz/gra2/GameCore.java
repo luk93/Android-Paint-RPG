@@ -62,7 +62,7 @@ public class GameCore extends AppCompatActivity
         setContentView(R.layout.activity_game_core);
         //Character(String name, int lvl, int hp, int exp, int wrog)
         //Dom(1-4) Droga1(1-8) Las1(7-12) Las2(7-18) Las3(7-18) Cmentarz1(14-20)
-        //Cmentarz2(19-24) Katakumby(21-28)
+        //Cmentarz2(19-24) Katakumby(21-28) Droga gory (7-12) Droga gory 2(30-36)
         charList.add(new Character("KOSTUCHA", 99, 100, 0, 99));//0
         charList.add(new Character("Mucha", 0, 1, 0, 1));         //1
         charList.add(new Character("Pajak", 0, 100, 0, 1));       //2
@@ -93,6 +93,14 @@ public class GameCore extends AppCompatActivity
         charList.add(new Character("Wojownik Zombie", 5, 100, 0, 1));//27
         charList.add(new Character("Zwariowana Mumia", 6, 100, 0, 1));//28
         charList.add(new Character("Dominik Martwy", 8, 100, 0, 1));//29
+        charList.add(new Character("Koza górska", 3, 100, 0, 0));//30
+        charList.add(new Character("Zwariowana koza górska", 3, 100, 0, 1));//31
+        charList.add(new Character("Niewielki wilk", 3, 100, 0, 1));//32
+        charList.add(new Character("Bandyta Pospolity", 3, 100, 0, 1));//33
+        charList.add(new Character("Myśliwy", 1, 100, 0, 0));     //34
+        charList.add(new Character("Niebieski Duch", 1, 100, 0, 3));//35
+        charList.add(new Character("Pijany góral", 3, 100, 0, 1));//36
+
 
         //spis lokacji
         locationList.add("Dom");    //0
@@ -107,6 +115,7 @@ public class GameCore extends AppCompatActivity
         locationList.add("Jezioro1"); //9
         locationList.add("Jezioro2"); //10
         locationList.add("DrogaGory");//11
+        locationList.add("DrogaGory2"); //12
 
         //fishList nazw przedmiotow
         itemNameList.add("Nic"); //0
@@ -339,6 +348,9 @@ public class GameCore extends AppCompatActivity
                     }
                     else action1(6, 7);
                     break;
+                case 12:
+                    action1(7, 30);
+                    break;
                 default:
                     break;
             }
@@ -483,7 +495,20 @@ public class GameCore extends AppCompatActivity
                 bRight.setVisibility(View.INVISIBLE);
                 b1.setText("LOWIENIE");
                 break;
-
+            case 11:
+                bg.setImageResource(R.drawable.bg_droga_gory2);
+                tempMap = locationList.indexOf("DrogaGory2");
+                et.setText("Jestes w drodze w gory");
+                iv1.setVisibility(View.INVISIBLE);
+                bBack.setVisibility(View.VISIBLE);
+                bLeft.setVisibility(View.VISIBLE);
+                bFront.setVisibility(View.VISIBLE);
+                bRight.setVisibility(View.INVISIBLE);
+                imageTemp.clearAnimation();
+                imageTemp.setVisibility(View.INVISIBLE);
+                b1.setText("Losuj przeciwnika");
+                isClickedTemp = false;
+                break;
             default:
                 break;
 
@@ -608,6 +633,17 @@ public class GameCore extends AppCompatActivity
                 imageTemp.setVisibility(View.INVISIBLE);
                 b1.setText("Losuj przeciwnika");
                 isClickedTemp = false;
+                break;
+            case 12:
+                bg.setImageResource(R.drawable.bg_droga_gory);
+                tempMap = locationList.indexOf("DrogaGory");
+                et.setText("Jestes na drodze do gór");
+                iv1.setVisibility(View.INVISIBLE);
+                bRight.setVisibility(View.INVISIBLE);
+                bBack.setVisibility(View.VISIBLE);
+                bLeft.setVisibility(View.INVISIBLE);
+                bFront.setVisibility(View.VISIBLE);
+                fireCamp();
                 break;
             default:
                 break;
@@ -774,6 +810,12 @@ public class GameCore extends AppCompatActivity
                 case 24:
                     iv1.setImageResource(R.drawable.zombie);
                     break;
+                case 30:
+                    iv1.setImageResource(R.drawable.gorskakoza);
+                    break;
+                case 34:
+                    iv1.setImageResource(R.drawable.mysliwy);
+                    break;
                 default:
                     iv1.setImageResource(R.drawable.neutral);
                     break;
@@ -787,6 +829,8 @@ public class GameCore extends AppCompatActivity
                 case 17:
                     iv1.setImageResource(R.drawable.drwal);
                     break;
+                case 35:
+                    iv1.setImageResource(R.drawable.niebieskiduch);
                 default:
                     iv1.setImageResource(R.drawable.przyjaciel);
                     break;

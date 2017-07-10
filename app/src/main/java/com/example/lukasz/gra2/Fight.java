@@ -135,6 +135,12 @@ public class Fight extends AppCompatActivity
             case 9:
                 tlo2.setImageResource(R.drawable.bg_jezioro1);
                 break;
+            case 11:
+                tlo2.setImageResource(R.drawable.bg_droga_gory);
+                break;
+            case 12:
+                tlo2.setImageResource(R.drawable.bg_droga_gory2);
+                break;
             default:
                 break;
 
@@ -191,6 +197,15 @@ public class Fight extends AppCompatActivity
                 break;
             case 28:
                 img2.setImageResource(R.drawable.mumia);
+                break;
+            case 31:
+                img2.setImageResource(R.drawable.zwariowana_gorska_koza);
+                break;
+            case 32:
+                img2.setImageResource(R.drawable.niewielki_wilk);
+                break;
+            case 36:
+                img2.setImageResource(R.drawable.pijany_goral);
                 break;
             default:
                 bool = true;

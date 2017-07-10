@@ -188,7 +188,6 @@ public class Equipment extends AppCompatActivity
         goldAmount = extra.getInt("goldAmount");
         cookedMeatAmount = extra.getInt("cookedMeatAmount");
         isCookedMeat = extra.getBoolean("isCookedMeat");
-        tv5.setText(String.valueOf(cookedMeatAmount)+" "+String.valueOf(isCookedMeat));
 
         goldText.setText(String.valueOf(goldAmount));
 
