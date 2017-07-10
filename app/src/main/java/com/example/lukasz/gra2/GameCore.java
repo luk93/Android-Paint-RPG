@@ -117,7 +117,7 @@ public class GameCore extends AppCompatActivity
         locationList.add("DrogaGory");//11
         locationList.add("DrogaGory2"); //12
 
-        //fishList nazw przedmiotow
+        //lista nazw przedmiotow
         itemNameList.add("Nic"); //0
         itemNameList.add("Kij"); //1
         itemNameList.add("Laczki"); //2
@@ -716,7 +716,7 @@ public class GameCore extends AppCompatActivity
         }
     }
 
-    public void onDrop(View view)
+    public void onDrop(View view) //temporary button for testing EQ
     {
         rollEq(0, 22, 40);
     }
