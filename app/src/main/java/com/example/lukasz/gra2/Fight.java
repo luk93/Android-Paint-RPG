@@ -141,6 +141,9 @@ public class Fight extends AppCompatActivity
             case 12:
                 tlo2.setImageResource(R.drawable.bg_droga_gory2);
                 break;
+            case 13: //temp
+                tlo2.setImageResource(R.drawable.bg_droga_karczma);
+                break;
             default:
                 break;
 

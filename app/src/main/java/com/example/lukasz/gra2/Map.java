@@ -80,6 +80,14 @@ public class Map extends AppCompatActivity
                 iv2.setX(180);
                 iv2.setY(390);
                 break;
+            case 12:
+                iv2.setX(120);
+                iv2.setY(440);
+                break;
+            case 13: //temp
+                iv2.setX(430);
+                iv2.setY(390);
+                break;
             default:
                 break;
         }

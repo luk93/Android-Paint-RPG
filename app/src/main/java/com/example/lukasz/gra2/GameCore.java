@@ -35,7 +35,7 @@ public class GameCore extends AppCompatActivity
 
     private static final int REQUEST_CODE = 1;
 
-    Animation pulse_low;
+    Animation pulse_low, char_appearing;
 
     int counter = 0, counterPassword = 0, drop, random;
     EditText et;
@@ -117,6 +117,8 @@ public class GameCore extends AppCompatActivity
         locationList.add("DrogaGory");//11
         locationList.add("DrogaGory2"); //12
 
+        locationList.add("DrogaKarczma"); //temp 13
+
         //lista nazw przedmiotow
         itemNameList.add("Nic"); //0
         itemNameList.add("Kij"); //1
@@ -163,6 +165,7 @@ public class GameCore extends AppCompatActivity
 
 
         pulse_low = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.pulse_low);
+        char_appearing = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.appearin_scale);
 
         et = (EditText) findViewById(R.id.editField);
         b1 = (Button) findViewById(R.id.button1);
@@ -351,6 +354,9 @@ public class GameCore extends AppCompatActivity
                 case 12:
                     action1(7, 30);
                     break;
+                case 13: //temp
+                    action1(6,7);
+                    break;
                 default:
                     break;
             }
@@ -433,6 +439,7 @@ public class GameCore extends AppCompatActivity
                 iv1.setVisibility(View.INVISIBLE);
                 bBack.setVisibility(View.VISIBLE);
                 bLeft.setVisibility(View.VISIBLE);
+                bRight.setVisibility(View.VISIBLE);
                 bFront.setVisibility(View.INVISIBLE);
                 break;
             case 2:
@@ -536,6 +543,7 @@ public class GameCore extends AppCompatActivity
                 iv1.setVisibility(View.INVISIBLE);
                 bBack.setVisibility(View.VISIBLE);
                 bLeft.setVisibility(View.VISIBLE);
+                bRight.setVisibility(View.VISIBLE);
                 bFront.setVisibility(View.INVISIBLE);
                 tempMap = locationList.indexOf("Droga1");
                 break;
@@ -645,6 +653,15 @@ public class GameCore extends AppCompatActivity
                 bFront.setVisibility(View.VISIBLE);
                 fireCamp();
                 break;
+            case 13: //temp
+                et.setText("Jestes na drodze ");
+                bg.setImageResource(R.drawable.bg2);
+                iv1.setVisibility(View.INVISIBLE);
+                bBack.setVisibility(View.VISIBLE);
+                bLeft.setVisibility(View.VISIBLE);
+                bFront.setVisibility(View.INVISIBLE);
+                tempMap = locationList.indexOf("Droga1");
+                break;
             default:
                 break;
 
@@ -700,6 +717,16 @@ public class GameCore extends AppCompatActivity
     {
         switch (tempMap)
         {
+            case 1:
+                et.setText("Jestes w drodze do karczmy");
+                bg.setImageResource(R.drawable.bg_droga_karczma);
+                iv1.setVisibility(View.INVISIBLE);
+                bLeft.setVisibility(View.INVISIBLE);
+                bRight.setVisibility(View.VISIBLE);
+                bFront.setVisibility(View.VISIBLE);
+                bBack.setVisibility(View.VISIBLE);
+                tempMap = locationList.indexOf("DrogaKarczma");
+                break;
             case 4:
                 bg.setImageResource(R.drawable.bg_jezioro1);
                 tempMap = locationList.indexOf("Jezioro1");
@@ -820,6 +847,7 @@ public class GameCore extends AppCompatActivity
                     iv1.setImageResource(R.drawable.neutral);
                     break;
             }
+            iv1.startAnimation(char_appearing);
         }
         if (opponent.getOpponentId() == 2)
         {
@@ -835,6 +863,7 @@ public class GameCore extends AppCompatActivity
                     iv1.setImageResource(R.drawable.przyjaciel);
                     break;
             }
+            iv1.startAnimation(char_appearing);
             if (you.gethp() <= 90)
             {
                 you.plushp(10);
@@ -850,6 +879,7 @@ public class GameCore extends AppCompatActivity
         {
             iv1.setVisibility(View.VISIBLE);
             iv1.setImageResource(R.drawable.kostucha);
+            iv1.startAnimation(char_appearing);
             sound = MediaPlayer.create(getApplicationContext(), R.raw.game_over);
             sound.start();
             mediaPlayer.stop();
@@ -874,6 +904,7 @@ public class GameCore extends AppCompatActivity
                     iv1.setImageResource(R.drawable.medyk);
                     break;
             }
+            iv1.startAnimation(char_appearing);
             if (you.gethp() <= 80)
             {
                 you.plushp(20);
@@ -1053,31 +1084,31 @@ public class GameCore extends AppCompatActivity
                 goldAmount = returnedData.getExtras().getInt("goldAmount");
                 if (fightId == 1 && charList.get(tempIndex).getlvl() == 0)
                 {
-                    rollEq(0, 7, 16); //numbers 1-7 are being rolled from 16 which is 37,5% drop rate
+                    rollEq(0, 7, 15); //numbers 1-7 are being rolled from 15 which is 6/15 * 100% = 40 drop rate
                 }
                 if (fightId == 1 && charList.get(tempIndex).getlvl() == 1)
                 {
-                    rollEq(0, 7, 16);
+                    rollEq(0, 7, 15);
                 }
                 if (fightId == 1 && charList.get(tempIndex).getlvl() == 2)
                 {
-                    rollEq(0, 14, 34);
+                    rollEq(0, 14, 32); // 13/32 = 0,4
                 }
                 if(fightId == 1 && charList.get(tempIndex).getlvl() == 3)
                 {
-                    rollEq(7, 22, 40);
+                    rollEq(7, 22, 40); // (22-7)/47 = 0,4
                 }
                 if(fightId == 1 && charList.get(tempIndex).getlvl() == 4)
                 {
-                    rollEq(15, 22, 19);
+                    rollEq(15, 22, 19); // 7/17 = 0,41
                 }
                 if(fightId == 1 && charList.get(tempIndex).getlvl() == 5)
                 {
-                    rollEq(23, 29, 16);
+                    rollEq(23, 29, 15); // 6/15 = 0,4
                 }
                 if(fightId == 1 && charList.get(tempIndex).getlvl() == 6)
                 {
-                    rollEq(23, 36, 37);
+                    rollEq(23, 36, 32); // 13/32 = 0,4
                 }
 
             }  if (returnedData.hasExtra("fishingExp") && returnedData.hasExtra("fishingHp") &&
