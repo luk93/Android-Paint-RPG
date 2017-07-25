@@ -41,7 +41,7 @@ public class GameCore extends AppCompatActivity
     EditText et;
     Button b1, b2, bFront, bLeft, bBack, bRight, bEQ, bDrop;
     TextView tv1, tv2, tv3;
-    ImageView iv1, bg, imageTemp;
+    ImageView iv1, bg, imageTemp, imageTemp2;
     String nameHero, tempPassword;
     boolean newGame = true, isCatched = false, isFishMeat = false;
     int tempLvl, tempHp, tempExp;
@@ -53,7 +53,7 @@ public class GameCore extends AppCompatActivity
     int tempMap = 0, fightId, cookedMeatAmount;
     int tempIndex = 1, meatAmount = 0, goldAmount = 0;
     int items[] = new int[12];
-    boolean bagEmpty[] = new boolean[12], isEqFull, isClickedTemp = false, isCookedMeat;
+    boolean bagEmpty[] = new boolean[12], isEqFull, isClickedTemp = false,isClickedTemp2 = false, isCookedMeat;
     Equipment eq = new Equipment();
 
     protected void onCreate(final Bundle savedInstanceState)
@@ -118,6 +118,7 @@ public class GameCore extends AppCompatActivity
         locationList.add("DrogaGory2"); //12
 
         locationList.add("DrogaKarczma"); //temp 13
+        locationList.add("DrogaKarczma2"); //temp14
 
         //lista nazw przedmiotow
         itemNameList.add("Nic"); //0
@@ -180,6 +181,7 @@ public class GameCore extends AppCompatActivity
         tv2 = (TextView) findViewById(R.id.opponentField);
         iv1 = (ImageView) findViewById(R.id.image);
         imageTemp = (ImageView)findViewById(R.id.imageTemp);
+        imageTemp2 = (ImageView)findViewById(R.id.imageTemp2);
         bg = (ImageView) findViewById(R.id.bg1);
         tv3 = (TextView) findViewById(R.id.textView);
 
@@ -191,6 +193,7 @@ public class GameCore extends AppCompatActivity
         bg.setImageResource(R.drawable.bg_title);
         iv1.setVisibility(View.INVISIBLE);
         imageTemp.setVisibility(View.INVISIBLE);
+        imageTemp2.setVisibility(View.INVISIBLE);
 
         sharedPreferences = getSharedPreferences("com.example.lukasz.gra2", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -516,6 +519,18 @@ public class GameCore extends AppCompatActivity
                 b1.setText("Losuj przeciwnika");
                 isClickedTemp = false;
                 break;
+            case 13:
+                bg.setImageResource(R.drawable.bg_droga_karczma2);
+                tempMap = locationList.indexOf("DrogaKarczma2");
+                et.setText("Jestes przed karczmą");
+                iv1.setVisibility(View.INVISIBLE);
+                bBack.setVisibility(View.VISIBLE);
+                bLeft.setVisibility(View.VISIBLE);
+                bFront.setVisibility(View.VISIBLE);
+                bRight.setVisibility(View.INVISIBLE);
+                market();
+                isClickedTemp = false;
+                break;
             default:
                 break;
 
@@ -661,6 +676,18 @@ public class GameCore extends AppCompatActivity
                 bLeft.setVisibility(View.VISIBLE);
                 bFront.setVisibility(View.INVISIBLE);
                 tempMap = locationList.indexOf("Droga1");
+                break;
+            case 14: //temp
+                et.setText("Jestes w drodze do karczmy");
+                bg.setImageResource(R.drawable.bg_droga_karczma);
+                iv1.setVisibility(View.INVISIBLE);
+                bLeft.setVisibility(View.INVISIBLE);
+                bRight.setVisibility(View.VISIBLE);
+                bFront.setVisibility(View.VISIBLE);
+                bBack.setVisibility(View.VISIBLE);
+                tempMap = locationList.indexOf("DrogaKarczma");
+                imageTemp2.setVisibility(View.INVISIBLE);
+                b1.setText("Losuj przeciwnika");
                 break;
             default:
                 break;
@@ -1292,6 +1319,29 @@ public class GameCore extends AppCompatActivity
                     isClickedTemp = false;
                     imageTemp.setImageResource(R.drawable.ognisko);
                     imageTemp.startAnimation(pulse_low);
+                    b1.setText("Losuj przeciwnika");
+                }
+            }
+        });
+    }
+    private void market()
+    {
+        imageTemp2.setImageResource(R.drawable.targ);
+        imageTemp2.setVisibility(View.VISIBLE);
+        imageTemp2.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                if (isClickedTemp2 == false)
+                {
+                    imageTemp2.setImageResource(R.drawable.targ_active);
+                    b1.setText("Handluj");
+                    isClickedTemp2 = true;
+                }
+                else
+                {
+                    isClickedTemp2 = false;
+                    imageTemp2.setImageResource(R.drawable.targ);
                     b1.setText("Losuj przeciwnika");
                 }
             }
