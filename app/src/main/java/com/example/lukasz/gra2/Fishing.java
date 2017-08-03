@@ -488,7 +488,28 @@ public class Fishing extends AppCompatActivity implements SensorEventListener
     protected void onPause() {
         super.onPause();
         sm.unregisterListener(this);
-        media.stop();
+        if (media != null && media.isPlaying())
+        {
+            media.stop();
+            media.reset();
+            media.release();
+            media = null;
+        }
+        if (sound2 != null)
+        {
+            sound2.release();
+            sound2 = null;
+        }
+        if (sound3 != null)
+        {
+            sound3.release();
+            sound3 = null;
+        }
+        if (sound1 != null)
+        {
+            sound1.release();
+            sound1 = null;
+        }
     }
 
     public void onClick(View view)
@@ -506,7 +527,6 @@ public class Fishing extends AppCompatActivity implements SensorEventListener
         fishingOver.putExtra("isFishMeat", isFishMeat);
         setResult(RESULT_OK, fishingOver);
         super.finish();
-        media.stop();
     }
 
     public void onClick3(View view)

@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -360,6 +361,11 @@ public class GameCore extends AppCompatActivity
                 case 13: //temp
                     action1(6,7);
                     break;
+                case 14:
+                    if (isClickedTemp2)
+                    {
+                        weaponMarketAction();
+                    }
                 default:
                     break;
             }
@@ -1053,6 +1059,7 @@ public class GameCore extends AppCompatActivity
     {
         super.onPause();
         mediaPlayer.pause();
+        disableSound();
         editor.putInt("atack", eq.atack);
         editor.putInt("defense", eq.defense);
         editor.putInt("level", tempLvl);
@@ -1365,6 +1372,34 @@ public class GameCore extends AppCompatActivity
         sound = MediaPlayer.create(getApplicationContext(), R.raw.eq_open_close);
         sound.start();
         startActivityForResult(intentEq, REQUEST_CODE);
+    }
+    private void weaponMarketAction()
+    {
+        Intent intentWeaponMarket = new Intent(this, WeaponMarket.class);
+        intentWeaponMarket.putExtra("drop1", items[1]);
+        intentWeaponMarket.putExtra("drop2", items[2]);
+        intentWeaponMarket.putExtra("drop3", items[3]);
+        intentWeaponMarket.putExtra("drop4", items[4]);
+        intentWeaponMarket.putExtra("drop5", items[5]);
+        intentWeaponMarket.putExtra("drop6", items[6]);
+        intentWeaponMarket.putExtra("meatAmount", meatAmount);
+        intentWeaponMarket.putExtra("isFishMeat", isFishMeat);
+        intentWeaponMarket.putExtra("cookedMeatAmount", cookedMeatAmount);
+        intentWeaponMarket.putExtra("isCookedMeat", isCookedMeat);
+        intentWeaponMarket.putExtra("goldAmount", goldAmount);
+
+        startActivityForResult(intentWeaponMarket, REQUEST_CODE);
+    }
+    private void disableSound()
+    {
+            if (sound != null && sound.isPlaying())
+            {
+                sound.stop();
+                sound.reset();
+                sound.release();
+                sound = null;
+            }
+
     }
 
 }

@@ -228,10 +228,24 @@ public class Equipment extends AppCompatActivity
 
     protected void onPause()
     {
-        mediaPlayer.stop();
-        sound = MediaPlayer.create(getApplicationContext(), R.raw.eq_open_close);
-        sound.start();
         super.onPause();
+        if (mediaPlayer != null && mediaPlayer.isPlaying())
+    {
+        mediaPlayer.stop();
+        mediaPlayer.reset();
+        mediaPlayer.release();
+        mediaPlayer = null;
+    }
+        if (sound2 != null)
+        {
+            sound2.release();
+            sound2 = null;
+        }
+        if (sound != null)
+        {
+            sound.release();
+            sound = null;
+        }
     }
 
     public void onHead(View view)

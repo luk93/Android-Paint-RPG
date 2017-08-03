@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.Random;
 
 public class Fight extends AppCompatActivity
@@ -492,7 +493,6 @@ public class Fight extends AppCompatActivity
         sound1 = MediaPlayer.create(getApplicationContext(), R.raw.run);
         sound1.start();
         super.finish();
-        mediaPlayer.stop();
     }
 
     public void onClickOk(View view)
@@ -679,7 +679,7 @@ public class Fight extends AppCompatActivity
     protected void onPause()
     {
         super.onPause();
-        mediaPlayer.stop();
+        disableSound();
     }
 
     private void pulseRightButtons()
@@ -708,5 +708,38 @@ public class Fight extends AppCompatActivity
         okButton.startAnimation(pulse);
     }
 
+    private void disableSound()
+    {
+        //disable mediaPlayer, sound1, sound2, sound3, sound4;
+            if (mediaPlayer != null && mediaPlayer.isPlaying())
+            {
+                mediaPlayer.stop();
+                mediaPlayer.reset();
+                mediaPlayer.release();
+                mediaPlayer = null;
+            }
+            if (sound2 != null)
+            {
+                sound2.release();
+                sound2 = null;
+            }
+            if (sound3 != null)
+            {
+                sound3.release();
+                sound3 = null;
+            }
+            if (sound4 != null)
+            {
+                sound4.release();
+                sound4 = null;
+            }
+            if (sound1 != null)
+            {
+                sound1.release();
+                sound1 = null;
+            }
+
+
+    }
 
 }

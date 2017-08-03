@@ -33,7 +33,11 @@
             android:name=".Equipment"
             android:screenOrientation="landscape">
         </activity>
-        <activity android:name=".CampFire"
+        <activity
+            android:name=".CampFire"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity android:name=".WeaponMarket"
                   android:screenOrientation="landscape">
         </activity>
     </application>

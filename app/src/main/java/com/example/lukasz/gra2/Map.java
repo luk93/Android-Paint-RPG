@@ -96,8 +96,22 @@ public class Map extends AppCompatActivity
     public void onClick1(View view)
     {
         super.finish();
-        sound.start();
-        mediaPlayer.stop();
+    }
+    protected void onPause()
+    {
+        super.onPause();
+        if (mediaPlayer != null && mediaPlayer.isPlaying())
+        {
+            mediaPlayer.stop();
+            mediaPlayer.reset();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+        if (sound != null)
+        {
+            sound.release();
+            sound = null;
+        }
     }
 
 }

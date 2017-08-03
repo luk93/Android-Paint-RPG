@@ -144,7 +144,18 @@ public class CampFire extends AppCompatActivity
     {
         super.onPause();
         threadloop = false;
-        music.pause();
+        if (music != null && music.isPlaying())
+        {
+            music.stop();
+            music.reset();
+            music.release();
+            music = null;
+        }
+        if (sound != null)
+        {
+            sound.release();
+            sound = null;
+        }
     }
     public void onExit(View view)
     {
