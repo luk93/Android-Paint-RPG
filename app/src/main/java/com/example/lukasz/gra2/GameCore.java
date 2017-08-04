@@ -225,6 +225,7 @@ public class GameCore extends AppCompatActivity
                     tempHp = 100;
                 } else
                 {
+                    et.setEnabled(false);
                     tempLvl = sharedPreferences.getInt("level", 0);
                     tempExp = sharedPreferences.getInt("exp", 0);
                     eq.defense = sharedPreferences.getInt("defense", 0);
@@ -386,6 +387,7 @@ public class GameCore extends AppCompatActivity
                 eq.atack = hero.getAttackpoint();
                 eq.defense = hero.getAttackpoint();
                 et.setText("Niech rozpocznie się twa przygoda. Powodzenia " + hero.getName() + "!");
+                et.setEnabled(false);
                 bg.setImageResource(R.drawable.bg1);
                 for (int i = 0; i <= 11; i++)
                 {
@@ -398,6 +400,7 @@ public class GameCore extends AppCompatActivity
             } else
             {
                 et.setText("Ha! Powróciłeś do gry " + nameHero + ". Kolejny raz - powodzenia");
+                et.setEnabled(false);
                 bg.setImageResource(R.drawable.bg1);
             }
             Character hero = new Character(nameHero, tempLvl, tempHp, tempExp, 5, eq.atack, eq.defense);
@@ -498,6 +501,7 @@ public class GameCore extends AppCompatActivity
                 bRight.setVisibility(View.INVISIBLE);
                 tv1.setText("Podaj hasło, albo odejdź z niesmakiem");
                 et.setText("");
+                et.setEnabled(true);
                 b1.setText("Podaj hasło");
                 break;
             case 9:
@@ -556,6 +560,7 @@ public class GameCore extends AppCompatActivity
                 bBack.setVisibility(View.INVISIBLE);
                 bLeft.setVisibility(View.INVISIBLE);
                 bFront.setVisibility(View.VISIBLE);
+                bRight.setVisibility(View.INVISIBLE);
                 tempMap = locationList.indexOf("Dom");
                 break;
             case 2:
@@ -624,6 +629,7 @@ public class GameCore extends AppCompatActivity
                 bg.setImageResource(R.drawable.bg_katakumby);
                 tempMap = locationList.indexOf("Katakumby");
                 et.setText("Jestes w katakumbach");
+                et.setEnabled(false);
                 iv1.setVisibility(View.INVISIBLE);
                 bBack.setVisibility(View.VISIBLE);
                 bLeft.setVisibility(View.INVISIBLE);
@@ -1382,6 +1388,7 @@ public class GameCore extends AppCompatActivity
         intentWeaponMarket.putExtra("drop4", items[4]);
         intentWeaponMarket.putExtra("drop5", items[5]);
         intentWeaponMarket.putExtra("drop6", items[6]);
+
         intentWeaponMarket.putExtra("meatAmount", meatAmount);
         intentWeaponMarket.putExtra("isFishMeat", isFishMeat);
         intentWeaponMarket.putExtra("cookedMeatAmount", cookedMeatAmount);

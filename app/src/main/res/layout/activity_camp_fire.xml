@@ -40,7 +40,7 @@
         android:layout_marginLeft="180dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="275dp"/>
+        android:layout_marginBottom="290dp"/>
 
     <ImageView
         android:id="@+id/imageMeat"
