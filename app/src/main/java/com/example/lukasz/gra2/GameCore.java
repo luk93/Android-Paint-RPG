@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -170,7 +169,7 @@ public class GameCore extends AppCompatActivity
         char_appearing = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.appearin_scale);
 
         et = (EditText) findViewById(R.id.editField);
-        b1 = (Button) findViewById(R.id.button1);
+        b1 = (Button) findViewById(R.id.buttonAction);
         b2 = (Button) findViewById(R.id.button2);
         bFront = (Button) findViewById(R.id.bFront);
         bBack = (Button) findViewById(R.id.bBack);

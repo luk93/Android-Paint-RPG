@@ -104,7 +104,7 @@
         app:srcCompat="@drawable/w1" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/buttonAction"
         android:layout_width="88dp"
         android:layout_height="48dp"
         android:layout_marginTop="130dp"
@@ -124,7 +124,7 @@
         android:background="@drawable/button2"
         android:onClick="onClick12"
         app:layout_constraintBottom_toTopOf="@+id/button3"
-        app:layout_constraintTop_toBottomOf="@+id/button1"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAction"
         android:layout_marginLeft="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginStart="10dp" />

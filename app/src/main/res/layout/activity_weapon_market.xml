@@ -34,16 +34,16 @@
         android:id="@+id/goldText"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="505dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="277dp"
         android:text="0"
         android:textAlignment="center"
         android:textColor="@android:color/holo_orange_light"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="505dp"/>
+        android:layout_marginLeft="518dp"
+        app:layout_constraintLeft_toLeftOf="@+id/bg_market"
+        android:layout_marginStart="518dp"/>
 
     <ImageView
         android:id="@+id/imageOneHand"
@@ -53,7 +53,8 @@
         android:layout_marginTop="280dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/one_h_market"/>
+        app:srcCompat="@drawable/one_h_market"
+        android:layout_marginStart="80dp"/>
 
     <ImageView
         android:id="@+id/imageArmor"
@@ -63,7 +64,8 @@
         android:layout_marginTop="260dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/armor_market"/>
+        app:srcCompat="@drawable/armor_market"
+        android:layout_marginStart="150dp"/>
 
     <ImageView
         android:id="@+id/imageBoots"
@@ -73,7 +75,8 @@
         android:layout_marginTop="305dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/boots_market"/>
+        app:srcCompat="@drawable/boots_market"
+        android:layout_marginStart="210dp"/>
 
     <ImageView
         android:id="@+id/imageShield"
@@ -83,7 +86,8 @@
         android:layout_marginTop="260dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/shield_market"/>
+        app:srcCompat="@drawable/shield_market"
+        android:layout_marginStart="280dp"/>
 
     <ImageView
         android:id="@+id/imageTwoHands"
@@ -93,6 +97,118 @@
         android:layout_marginTop="260dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/two_h_market"/>
+        app:srcCompat="@drawable/two_h_market"
+        android:layout_marginStart="355dp"/>
+
+    <Button
+        android:id="@+id/buttonAction"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button"
+        android:onClick="onAction"
+        android:text="Button"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bg_market"
+        android:layout_marginStart="100dp"/>
+
+    <Button
+        android:id="@+id/buttonExit"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_wyjscie_eq"
+        android:onClick="onExit"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bg_market"/>
+
+    <TextView
+        android:id="@+id/textViewMarket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Informacje"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/bg_market"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="8dp"/>
+
+    <ScrollView
+        android:id="@+id/scroll"
+        style="@android:style/Widget.DeviceDefault.Light.ScrollView"
+        android:layout_width="380dp"
+        android:layout_height="140dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="260dp"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/skrzynia"
+        android:scrollbarStyle="insideOverlay"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.297">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/itemListRG"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioButton
+                    android:id="@+id/radioButton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="item1"
+                    android:textSize="20sp"/>
+
+                <RadioButton
+                    android:id="@+id/radioButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="item2"
+                    android:textSize="20sp"/>
+
+                <RadioButton
+                    android:id="@+id/radioButton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="item3"
+                    android:textSize="20sp"/>
+
+                <RadioButton
+                    android:id="@+id/radioButton4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="item4"
+                    android:textSize="20sp"/>
+
+                <RadioButton
+                    android:id="@+id/radioButton5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="item5"
+                    android:textSize="20sp"/>
+
+            </RadioGroup>
+        </LinearLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

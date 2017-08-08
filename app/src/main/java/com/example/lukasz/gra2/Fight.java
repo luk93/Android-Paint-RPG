@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.io.IOException;
 import java.util.Random;
 
 public class Fight extends AppCompatActivity
@@ -83,7 +82,7 @@ public class Fight extends AppCompatActivity
         tv3 = (TextView) findViewById(R.id.textView3);
         tv4 = (TextView) findViewById(R.id.textView4);
 
-        b1 = (Button)findViewById(R.id.button1);
+        b1 = (Button)findViewById(R.id.buttonAction);
         b2 = (Button)findViewById(R.id.button2);
         b3 = (Button)findViewById(R.id.button3);
         b4 = (Button)findViewById(R.id.button4);
