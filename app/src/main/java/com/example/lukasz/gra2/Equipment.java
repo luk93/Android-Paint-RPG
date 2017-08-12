@@ -63,27 +63,27 @@ public class Equipment extends AppCompatActivity
         itemList.add(new Item("drewniany hełm", 1, 0, 0, 8, 0));             //22
         //5,6
         itemList.add(new Item("szeroki miecz", 2, 0, 0, 0, 8));       //23
-        itemList.add(new Item("żelazne buty", 5, 0, 0, 8, 0));             //24
-        itemList.add(new Item("wzmacniany puklerz", 3, 0, 0, 8, 0));    //25
-        itemList.add(new Item("kolczuga", 4, 0, 0, 8, 0));             //26
-        itemList.add(new Item("topór obosieczny", 6, 0, 0, 0, 15));             //27
-        itemList.add(new Item("potrawka", 7, 0, 0, 0, 0, 12));        //28
+        itemList.add(new Item("żelazne buty", 5, 0, 0, 12, 0));             //24
+        itemList.add(new Item("wzmacniany puklerz", 3, 0, 0, 12, 0));    //25
+        itemList.add(new Item("kolczuga", 4, 0, 0, 12, 0));             //26
+        itemList.add(new Item("topór obosieczny", 6, 0, 0, 0, 20));             //27
+        itemList.add(new Item("potrawka", 7, 0, 0, 0, 0, 15));        //28
         itemList.add(new Item("żelazny hełm", 1, 0, 0, 8, 0));             //29
         //6
-        itemList.add(new Item("ostra katana", 2, 0, 0, 0, 8));       //30
-        itemList.add(new Item("stalowe buty", 5, 0, 0, 8, 0));             //31
-        itemList.add(new Item("stalowa tarcza", 3, 0, 0, 8, 0));    //32
-        itemList.add(new Item("stalowa zbroja", 4, 0, 0, 8, 0));             //33
-        itemList.add(new Item("stalowy claymore", 6, 0, 0, 0, 15));             //34
-        itemList.add(new Item("duża porcja potrawki", 7, 0, 0, 0, 0, 12));        //35
-        itemList.add(new Item("stalowy hełm", 1, 0, 0, 8, 0));             //36
+        itemList.add(new Item("ostra katana", 2, 0, 0, 0, 15));       //30
+        itemList.add(new Item("stalowe buty", 5, 0, 0, 15, 0));             //31
+        itemList.add(new Item("stalowa tarcza", 3, 0, 0, 15, 0));    //32
+        itemList.add(new Item("stalowa zbroja", 4, 0, 0, 15, 0));             //33
+        itemList.add(new Item("stalowy claymore", 6, 0, 0, 0, 23));             //34
+        itemList.add(new Item("duża porcja potrawki", 7, 0, 0, 0, 0, 18));        //35
+        itemList.add(new Item("stalowy hełm", 1, 0, 0, 15, 0));             //36
         itemList.add(new Item("smażone rybie mięso",7, 0, 0, 0, 0, 1));          //37
 
 
 
 
 
-        //fishList ikon
+        //lista ikon
         iconList.add(R.drawable.eq_okno);  //0
         iconList.add(R.drawable.kij);     //1
         iconList.add(R.drawable.laczki);  //2

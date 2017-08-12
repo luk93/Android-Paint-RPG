@@ -1201,6 +1201,25 @@ public class GameCore extends AppCompatActivity
                 cookedMeatAmount = returnedData.getExtras().getInt("cookedMeatAmount");
                 isCookedMeat = returnedData.getExtras().getBoolean("isCookedMeat");
             }
+            if (returnedData.hasExtra("drop1") && returnedData.hasExtra("drop2") &&
+                    returnedData.hasExtra("drop3") && returnedData.hasExtra("drop4") && returnedData.hasExtra("drop5") &&
+                    returnedData.hasExtra("drop6") && returnedData.hasExtra("isFishMeat")&& returnedData.hasExtra("cookedMeatAmount")
+                    && returnedData.hasExtra("meatAmount"))
+            {
+                Character bohater = new Character(nameHero, tempLvl, tempHp, tempExp, 5, eq.atack, eq.defense);
+                items[1] = returnedData.getExtras().getInt("drop1");
+                items[2] = returnedData.getExtras().getInt("drop2");
+                items[3] = returnedData.getExtras().getInt("drop3");
+                items[4] = returnedData.getExtras().getInt("drop4");
+                items[5] = returnedData.getExtras().getInt("drop5");
+                items[6] = returnedData.getExtras().getInt("drop6");
+                meatAmount = returnedData.getExtras().getInt("meatAmount");
+                isFishMeat = returnedData.getExtras().getBoolean("isFishMeat");
+                goldAmount = returnedData.getExtras().getInt("goldAmount");
+                cookedMeatAmount = returnedData.getExtras().getInt("cookedMeatAmount");
+                isCookedMeat = returnedData.getExtras().getBoolean("isCookedMeat");
+                checkBags();
+            }
         }
     }
 
