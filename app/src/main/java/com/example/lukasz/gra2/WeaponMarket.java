@@ -22,14 +22,15 @@ public class WeaponMarket extends AppCompatActivity
     ArrayList<Item> itemList = new ArrayList<>();
     ArrayList<Integer>iconList = new ArrayList<>();
     Button bAction, bExit, b1, b2, b3, b4, b5, b6;
-    MediaPlayer soundMarket, musicMarket, soundMarket2;
+    MediaPlayer soundMarket, musicMarket, soundNegative, soundPositive;
     int items[] = new int[7];
     boolean isSelected[] = new boolean[13];
     boolean empty[] = new boolean[7];
     boolean isSelectedRB[] = new boolean[7];
     boolean isFishMeat, isCookedMeat = false;
-    int meatAmount, cookedMeatAmount, goldAmount, item1, item2, item3, item4, item5, item6;
+    int meatAmount, cookedMeatAmount, goldAmount, item1, item2, item3, item4, item5, item6, selectedItemId = 0;
     int itemToBuy[] = new int[6];
+    int sellingPrize, buyingPrize;
     TextView goldText, tvMarket;
     ImageView imageOneHand, imageTwoHands, imageShield, imageArmor, imageBoots, bg, imageHead;
 
@@ -160,7 +161,8 @@ public class WeaponMarket extends AppCompatActivity
         b6 = (Button)findViewById(R.id.button6);
 
         soundMarket = MediaPlayer.create(getApplicationContext(), R.raw.trade);
-        soundMarket2 = MediaPlayer.create(getApplicationContext(), R.raw.trade2);
+        soundNegative = MediaPlayer.create(getApplicationContext(), R.raw.trade2);
+        soundPositive = MediaPlayer.create(getApplicationContext(), R.raw.gold_sound);
         musicMarket = MediaPlayer.create(getApplicationContext(),R.raw.weapon_market);
         musicMarket.setLooping(true);
         musicMarket.start();
@@ -194,6 +196,7 @@ public class WeaponMarket extends AppCompatActivity
             {
                 if (isSelected[1] == false)
                 {
+                    bAction.setText("AKCJA");
                     rg.clearCheck();
                     tvMarket.setText("Wybierz broń jednoreczną");
                     resetSelectionAndImages();
@@ -210,6 +213,7 @@ public class WeaponMarket extends AppCompatActivity
             {
                 if (isSelected[2] == false)
                 {
+                    bAction.setText("AKCJA");
                     rg.clearCheck();
                     tvMarket.setText("Wybierz broń dwureczną");
                     resetSelectionAndImages();
@@ -226,6 +230,7 @@ public class WeaponMarket extends AppCompatActivity
             {
                 if (isSelected[3] == false)
                 {
+                    bAction.setText("AKCJA");
                     rg.clearCheck();
                     tvMarket.setText("Wybierz pancerz");
                     resetSelectionAndImages();
@@ -242,6 +247,7 @@ public class WeaponMarket extends AppCompatActivity
             {
                 if (isSelected[4] == false)
                 {
+                    bAction.setText("AKCJA");
                     rg.clearCheck();
                     tvMarket.setText("Wybierz obuwie");
                     resetSelectionAndImages();
@@ -258,6 +264,7 @@ public class WeaponMarket extends AppCompatActivity
             {
                 if (isSelected[5] == false)
                 {
+                    bAction.setText("AKCJA");
                     rg.clearCheck();
                     tvMarket.setText("Wybierz rzecz do drugiej ręki");
                     resetSelectionAndImages();
@@ -274,6 +281,7 @@ public class WeaponMarket extends AppCompatActivity
             {
                 if (isSelected[6] == false)
                 {
+                    bAction.setText("AKCJA");
                     rg.clearCheck();
                     tvMarket.setText("Wybierz nakrycie głowy");
                     resetSelectionAndImages();
@@ -290,8 +298,10 @@ public class WeaponMarket extends AppCompatActivity
             public void onClick(View v)
             {
                 bAction.setText("KUP");
-                tvMarket.setText(itemList.get(itemToBuy[1]).toString());
                 isSelectedRB[1]= true;
+                selectedItemId = itemToBuy[1];
+                buyingPrize = countBuyingPrize();
+                tvMarket.setText(itemList.get(itemToBuy[1]).toString()+"\nCena: "+buyingPrize+" zlotych monet");
             }
         });
         rb2.setOnClickListener(new View.OnClickListener()
@@ -300,8 +310,10 @@ public class WeaponMarket extends AppCompatActivity
             public void onClick(View v)
             {
                 bAction.setText("KUP");
-                tvMarket.setText(itemList.get(itemToBuy[2]).toString());
                 isSelectedRB[2] = true;
+                selectedItemId = itemToBuy[2];
+                buyingPrize = countBuyingPrize();
+                tvMarket.setText(itemList.get(itemToBuy[2]).toString()+"\nCena: "+buyingPrize+" zlotych monet");
             }
         });
         rb3.setOnClickListener(new View.OnClickListener()
@@ -310,8 +322,10 @@ public class WeaponMarket extends AppCompatActivity
             public void onClick(View v)
             {
                 bAction.setText("KUP");
-                tvMarket.setText(itemList.get(itemToBuy[3]).toString());
                 isSelectedRB[3] = true;
+                selectedItemId = itemToBuy[3];
+                buyingPrize = countBuyingPrize();
+                tvMarket.setText(itemList.get(itemToBuy[3]).toString()+"\nCena: "+buyingPrize+" zlotych monet");
             }
         });
         rb4.setOnClickListener(new View.OnClickListener()
@@ -320,8 +334,10 @@ public class WeaponMarket extends AppCompatActivity
             public void onClick(View v)
             {
                 bAction.setText("KUP");
-                tvMarket.setText(itemList.get(itemToBuy[4]).toString());
                 isSelectedRB[4] = true;
+                selectedItemId = itemToBuy[4];
+                buyingPrize = countBuyingPrize();
+                tvMarket.setText(itemList.get(itemToBuy[4]).toString()+"\nCena: "+buyingPrize+" zlotych monet");
             }
         });
         rb5.setOnClickListener(new View.OnClickListener()
@@ -330,8 +346,10 @@ public class WeaponMarket extends AppCompatActivity
             public void onClick(View v)
             {
                 bAction.setText("KUP");
-                tvMarket.setText(itemList.get(itemToBuy[5]).toString());
                 isSelectedRB [5] = true;
+                selectedItemId = itemToBuy[5];
+                buyingPrize = countBuyingPrize();
+                tvMarket.setText(itemList.get(itemToBuy[5]).toString()+"\nCena: "+buyingPrize+" zlotych monet");
             }
         });
     }
@@ -346,10 +364,12 @@ public class WeaponMarket extends AppCompatActivity
         if (empty[1])
         {
             tvMarket.setText("Slot 1 pusty");
+            selectedItemId = 0;
         }
         else
         {
             tvMarket.setText(itemList.get(item1).toString());
+            selectedItemId = item1;
         }
     }
     public void onClick2(View view)
@@ -363,10 +383,12 @@ public class WeaponMarket extends AppCompatActivity
         if (empty[2])
         {
             tvMarket.setText("Slot 2 pusty");
+            selectedItemId = 0;
         }
         else
         {
             tvMarket.setText(itemList.get(item2).toString());
+            selectedItemId = item2;
         }
     }
     public void onClick3(View view)
@@ -380,10 +402,12 @@ public class WeaponMarket extends AppCompatActivity
         if (empty[3])
         {
             tvMarket.setText("Slot 3 pusty");
+            selectedItemId = 0;
         }
         else
         {
             tvMarket.setText(itemList.get(item3).toString());
+            selectedItemId = item3;
         }
     }
     public void onClick4(View view)
@@ -397,10 +421,12 @@ public class WeaponMarket extends AppCompatActivity
         if (empty[4])
         {
             tvMarket.setText("Slot 4 pusty");
+            selectedItemId = 0;
         }
         else
         {
             tvMarket.setText(itemList.get(item4).toString());
+            selectedItemId = item4;
         }
     }
     public void onClick5(View view)
@@ -414,10 +440,12 @@ public class WeaponMarket extends AppCompatActivity
         if (empty[5])
         {
             tvMarket.setText("Slot 5 pusty");
+            selectedItemId = 0;
         }
         else
         {
             tvMarket.setText(itemList.get(item5).toString());
+            selectedItemId = item5;
         }
     }
     public void onClick6(View view)
@@ -431,10 +459,12 @@ public class WeaponMarket extends AppCompatActivity
         if (empty[6])
         {
             tvMarket.setText("Slot 6 pusty");
+            selectedItemId = 0;
         }
         else
         {
             tvMarket.setText(itemList.get(item6).toString());
+            selectedItemId = item6;
         }
     }
     protected void onPause()
@@ -445,10 +475,15 @@ public class WeaponMarket extends AppCompatActivity
             soundMarket.release();
             soundMarket = null;
         }
-        if (soundMarket2 != null)
+        if (soundNegative != null)
         {
-            soundMarket2.release();
-            soundMarket2 = null;
+            soundNegative.release();
+            soundNegative = null;
+        }
+        if (soundPositive != null)
+        {
+            soundPositive.release();
+            soundPositive = null;
         }
         if (musicMarket != null && musicMarket.isPlaying())
         {
@@ -545,11 +580,20 @@ public class WeaponMarket extends AppCompatActivity
     {
         if(isSelectedRB[1]||isSelectedRB[2]||isSelectedRB[3]||isSelectedRB[4]||isSelectedRB[5])
         {
-            tvMarket.setText("Kupno");
+            buyingPrize = countBuyingPrize();
+            buyItem();
         }
         else if(isSelected[7]||isSelected[8]||isSelected[9]||isSelected[10]||isSelected[11]||isSelected[12])
         {
-            tvMarket.setText("Sprzedaż");
+            if (selectedItemId != 6 && selectedItemId != 13 && selectedItemId != 15 && selectedItemId != 21 && selectedItemId != 28 && selectedItemId != 35 && selectedItemId != 37 ) //buyer doesnt want any food
+            {
+                sellItem();
+            }
+            else
+            {
+                tvMarket.setText("Nie handluję pożywieniem, a w tej chwili nie jestem głodny");
+                soundNegative.start();
+            }
         }
     }
     private void fillListHead()
@@ -678,6 +722,173 @@ public class WeaponMarket extends AppCompatActivity
             rb4.setText(itemList.get(itemToBuy[4]).getName() + ", obrona: " + itemList.get(itemToBuy[4]).getDefense_point());
             rb5.setText(itemList.get(itemToBuy[5]).getName() + ", obrona: " + itemList.get(itemToBuy[5]).getDefense_point());
         }
-
+    }
+    private int countBuyingPrize()
+    {
+        if(selectedItemId >= 1&& selectedItemId <= 7)
+        {
+            return 5;
+        }
+        if(selectedItemId >= 8 && selectedItemId <= 14)
+        {
+            return 10;
+        }
+        if(selectedItemId >= 16 && selectedItemId <= 22)
+        {
+            return 15;
+        }
+        if(selectedItemId >= 23 && selectedItemId <= 29)
+        {
+            return 20;
+        }
+        if(selectedItemId >= 30 && selectedItemId <= 37)
+        {
+            return 25;
+        }
+        else return 0;
+    }
+    private int countSellingPrize()
+    {
+        if(selectedItemId >= 1&& selectedItemId <= 7)
+        {
+            return 1;
+        }
+        if(selectedItemId >= 8 && selectedItemId <= 14)
+        {
+            return 6;
+        }
+        if(selectedItemId >= 16 && selectedItemId <= 22)
+        {
+            return 11;
+        }
+        if(selectedItemId >= 23 && selectedItemId <= 29)
+        {
+            return 16;
+        }
+        if(selectedItemId >= 30 && selectedItemId <= 37)
+        {
+            return 21;
+        }
+        else return 0;
+    }
+    private void sellItem()
+    {
+        int selectedSlot = 0;
+        if (selectedItemId != 0)
+        {
+            sellingPrize = countSellingPrize();
+            goldAmount = goldAmount + sellingPrize;
+            tvMarket.setText("Sprzedano " + itemList.get(selectedItemId).getName() + " za " + sellingPrize+" zlotych monet");
+            goldText.setText(String.valueOf(goldAmount));
+            soundPositive.start();
+            selectedItemId = 0;
+            for (int i = 7; i <= 12; i++) //set index of selected button
+            {
+                if (isSelected[i] == true)
+                {
+                    selectedSlot = i;
+                }
+            }
+            switch (selectedSlot)
+            {
+                case 7:
+                    b1.setBackgroundResource(iconList.get(0));
+                    item1 = 0;
+                    empty[1] = true;
+                    items[1] = 0;
+                    break;
+                case 8:
+                    b2.setBackgroundResource(iconList.get(0));
+                    item2 = 0;
+                    empty[2] = true;
+                    items[2] = 0;
+                    break;
+                case 9:
+                    b3.setBackgroundResource(iconList.get(0));
+                    item3 = 0;
+                    empty[3] = true;
+                    items[3] = 0;
+                    break;
+                case 10:
+                    b4.setBackgroundResource(iconList.get(0));
+                    item4 = 0;
+                    empty[4] = true;
+                    items[4] = 0;
+                    break;
+                case 11:
+                    b5.setBackgroundResource(iconList.get(0));
+                    item5 = 0;
+                    empty[5] = true;
+                    items[5] = 0;
+                    break;
+                case 12:
+                    b6.setBackgroundResource(iconList.get(0));
+                    item6 = 0;
+                    empty[6] = true;
+                    items[6] = 0;
+                    break;
+            }
+        }
+    }
+    private void buyItem()
+    {
+        if (buyingPrize <= goldAmount)
+        {
+            for (int i = 1; i <= 6; i++)
+            {
+                if (empty[i] && items[i] == 0)
+                {
+                    switch (i)
+                    {
+                        case 1:
+                            b1.setBackgroundResource(iconList.get(selectedItemId));
+                            item1 = selectedItemId;
+                            empty[1] = false;
+                            break;
+                        case 2:
+                            b2.setBackgroundResource(iconList.get(selectedItemId));
+                            item2 = selectedItemId;
+                            empty[2] = false;
+                            break;
+                        case 3:
+                            b3.setBackgroundResource(iconList.get(selectedItemId));
+                            item3 = selectedItemId;
+                            empty[3] = false;
+                            break;
+                        case 4:
+                            b4.setBackgroundResource(iconList.get(selectedItemId));
+                            item4 = selectedItemId;
+                            empty[4] = false;
+                            break;
+                        case 5:
+                            b5.setBackgroundResource(iconList.get(selectedItemId));
+                            item5 = selectedItemId;
+                            empty[5] = false;
+                            break;
+                        case 6:
+                            b6.setBackgroundResource(iconList.get(selectedItemId));
+                            item6 = selectedItemId;
+                            empty[6] = false;
+                            break;
+                    }
+                    items[i] = selectedItemId;
+                    goldAmount = goldAmount - buyingPrize;
+                    tvMarket.setText("Kupiono " + itemList.get(selectedItemId).getName() + " za " + buyingPrize+" zlotych monet.");
+                    goldText.setText(String.valueOf(goldAmount));
+                    soundPositive.start();
+                    break;
+                }
+                else
+                {
+                    tvMarket.setText("Pełny ekwipunek.");
+                    soundNegative.start();
+                }
+            }
+        }
+        else
+        {
+            tvMarket.setText("Nie masz wystarczającej ilości złota.");
+            soundNegative.start();
+        }
     }
 }
