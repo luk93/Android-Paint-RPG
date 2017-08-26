@@ -224,30 +224,31 @@
 
     <Button
         android:id="@+id/throwAway"
-        android:layout_width="100dp"
+        android:layout_width="475dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginBottom="80dp"
+        android:layout_marginLeft="3dp"
         android:background="@drawable/button"
         android:onClick="onClickThrow"
         android:text="WYRZUC"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.237"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/use"/>
+        app:layout_constraintLeft_toLeftOf="parent"/>
 
     <Button
         android:id="@+id/use"
-        android:layout_width="100dp"
+        android:layout_width="475dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="300dp"
+        android:layout_marginBottom="80dp"
+        android:layout_marginLeft="8dp"
         android:background="@drawable/button"
         android:onClick="onClickUse"
         android:text="UŻYJ"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintLeft_toRightOf="@+id/throwAway"/>
 
     <TextView
         android:id="@+id/goldText"
