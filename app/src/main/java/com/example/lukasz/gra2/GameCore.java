@@ -51,9 +51,9 @@ public class GameCore extends AppCompatActivity
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     int tempMap = 0, fightId, cookedMeatAmount;
-    int tempIndex = 1, meatAmount = 0, goldAmount = 0;
+    int tempIndex = 1, meatAmount = 0, goldAmount = 0, InnEntranceCounter = 1;
     int items[] = new int[12];
-    boolean bagEmpty[] = new boolean[12], isEqFull, isClickedTemp = false,isClickedTemp2 = false, isCookedMeat;
+    boolean bagEmpty[] = new boolean[12], isEqFull, isClickedTemp = false,isClickedTemp2 = false, isCookedMeat, innAvailable = false;
     Equipment eq = new Equipment();
 
     protected void onCreate(final Bundle savedInstanceState)
@@ -100,6 +100,7 @@ public class GameCore extends AppCompatActivity
         charList.add(new Character("Myśliwy", 1, 100, 0, 0));     //34
         charList.add(new Character("Niebieski Duch", 1, 100, 0, 3));//35
         charList.add(new Character("Pijany góral", 3, 100, 0, 1));//36
+        charList.add(new Character("Nietuzinkowy alchemik", 5,100, 0, 0)); //37
 
 
         //spis lokacji
@@ -119,6 +120,7 @@ public class GameCore extends AppCompatActivity
 
         locationList.add("DrogaKarczma"); //temp 13
         locationList.add("DrogaKarczma2"); //temp14
+        locationList.add("WejscieKarczma"); //temp15
 
         //lista nazw przedmiotow
         itemNameList.add("Nic"); //0
@@ -366,6 +368,50 @@ public class GameCore extends AppCompatActivity
                     {
                         weaponMarketAction();
                     }
+                    break;
+                case 15:
+                    if (innAvailable == false)
+                    {
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                        if (InnEntranceCounter == 1)
+                        {
+                            alertDialogBuilder.setMessage("Witam kolegę, chyba się nie znamy. Jestem trochę nietypowym alchemikiem... Nie wpuszczę Cię do tego przybytku, dopóki nie wesprzesz finansowo moich eksperymentów. 50 sztuk złota powinno wystarczyć.");
+                        }
+                        else alertDialogBuilder.setMessage("A więc zdecydowałeś się jednak wesprzeć naukę? 50 sztuk złota to odpowiednia kwota");
+                        alertDialogBuilder.setPositiveButton("ZAPLAC 50 SZTUK ZLOTA", new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface arg0, int arg1)
+                            {
+                                if (goldAmount >= 50)
+                                {
+                                    et.setText("Jesteś dobrym człowiekiem, "+nameHero+". Jakbyś potrzebował jakiś mikstur, zapraszam do swojej chatki w górach. Niebawem tam będę przebywał i dzięki Tobie kontynuował pracę.");
+                                }
+                                else
+                                {
+                                    et.setText("Kolego, nie dysponujesz takim majątkiem. Wróć jak uzbierasz odpowiednią kwotę. Pozdrawiam.");
+                                    InnEntranceCounter = 2;
+                                }
+                            }
+                        });
+                        alertDialogBuilder.setNegativeButton("WALCZ", new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                charList.get(37).setOpponentId(1);
+                                Character hero = new Character(nameHero, tempLvl, tempHp, tempExp, 5, eq.atack, eq.defense);
+                                try
+                                {
+                                    meeting(hero, charList.get(37));
+                                }
+                                    catch (InterruptedException e)
+                                {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        AlertDialog alertDialog = alertDialogBuilder.create();
+                        alertDialog.show();
+                    }
                 default:
                     break;
             }
@@ -439,8 +485,9 @@ public class GameCore extends AppCompatActivity
     }
 
 
-    public void onClickFront(View view)
+    public void onClickFront(View view) throws InterruptedException
     {
+        Character hero = new Character(nameHero, tempLvl, tempHp, tempExp, 5, eq.atack, eq.defense);
         switch (tempMap)
         {
             case 0:
@@ -540,14 +587,33 @@ public class GameCore extends AppCompatActivity
                 market();
                 isClickedTemp = false;
                 break;
+            case 14:
+                bg.setImageResource(R.drawable.bg_wejscie_karczma);
+                tempMap = locationList.indexOf("WejscieKarczma");
+                iv1.setVisibility(View.INVISIBLE);
+                bBack.setVisibility(View.VISIBLE);
+                bLeft.setVisibility(View.INVISIBLE);
+                bFront.setVisibility(View.INVISIBLE);
+                bRight.setVisibility(View.INVISIBLE);
+                isClickedTemp = false;
+                imageTemp2.setVisibility(View.INVISIBLE);
+                if (innAvailable == false)
+                {
+                    tempIndex = 37;
+                    meeting(hero, charList.get(37));
+                    et.setText("Jakiś dziwny gość blokuje Ci drogę do karczmy");
+                    b1.setText("POROZMAWIAJ");
+                }
+                break;
             default:
                 break;
 
         }
     }
 
-    public void onClickBack(View view)
+    public void onClickBack(View view)throws InterruptedException
     {
+        Character hero = new Character(nameHero, tempLvl, tempHp, tempExp, 5, eq.atack, eq.defense);
         switch (tempMap)
         {
             case 0:
@@ -700,14 +766,28 @@ public class GameCore extends AppCompatActivity
                 imageTemp2.setVisibility(View.INVISIBLE);
                 b1.setText("Losuj przeciwnika");
                 break;
+            case 15: //temp
+                bg.setImageResource(R.drawable.bg_droga_karczma2);
+                tempMap = locationList.indexOf("DrogaKarczma2");
+                et.setText("Jestes przed karczmą");
+                iv1.setVisibility(View.INVISIBLE);
+                bBack.setVisibility(View.VISIBLE);
+                bLeft.setVisibility(View.VISIBLE);
+                bFront.setVisibility(View.VISIBLE);
+                bRight.setVisibility(View.INVISIBLE);
+                market();
+                b1.setText("Losuj przeciwnika");
+                isClickedTemp = false;
+                break;
             default:
                 break;
 
         }
     }
 
-    public void onClickLeft(View view)
+    public void onClickLeft(View view)throws InterruptedException
     {
+        Character hero = new Character(nameHero, tempLvl, tempHp, tempExp, 5, eq.atack, eq.defense);
         switch (tempMap)
         {
             case 1:
@@ -751,8 +831,9 @@ public class GameCore extends AppCompatActivity
         }
     }
 
-    public void onClickRight(View view)
+    public void onClickRight(View view)throws InterruptedException
     {
+        Character hero = new Character(nameHero, tempLvl, tempHp, tempExp, 5, eq.atack, eq.defense);
         switch (tempMap)
         {
             case 1:
@@ -880,6 +961,9 @@ public class GameCore extends AppCompatActivity
                     break;
                 case 34:
                     iv1.setImageResource(R.drawable.mysliwy);
+                    break;
+                case 37:
+                    iv1.setImageResource(R.drawable.nietuzinkowy_alchemik);
                     break;
                 default:
                     iv1.setImageResource(R.drawable.neutral);

@@ -547,8 +547,8 @@ public class Fight extends AppCompatActivity
                         sound3.start();
                         tv3.setText("Obroniles się, a przeciwnik nie.");
                         if (opponentAtack.power > yourDefense.power)
-                            yourHp -= opponentAtack.power - yourDefense.power;
-                        opponentHp -= yourAtack.power;
+                            yourHp -= (opponentAtack.power - yourDefense.power);
+                        opponentHp -= (yourAtack.power - (Math.round(opponentDefense.power * 0.2)));
                     }
                 } else
                 {
@@ -558,13 +558,13 @@ public class Fight extends AppCompatActivity
                         tv3.setText("Nie obroniles się, a przeciwnik tak.");
                         if (yourAtack.power > opponentDefense.power)
                             opponentHp -= yourAtack.power - opponentDefense.power;
-                        yourHp -= opponentAtack.power;
+                        yourHp -= (opponentAtack.power - (Math.round(yourDefense.power * 0.2)));
                     } else
                     {
                         sound4.start();
                         tv3.setText("Nie obroniles się, przeciwnik też nie.");
-                        yourHp -= opponentAtack.power;
-                        opponentHp -= yourAtack.power;
+                        yourHp -= (opponentAtack.power - (Math.round(yourDefense.power * 0.2)));
+                        opponentHp -= (yourAtack.power - (Math.round(opponentDefense.power * 0.2)));
                     }
 
                 }
