@@ -104,7 +104,10 @@ public class Fight extends AppCompatActivity
         swiperight = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.swipe_right);
         img2.startAnimation(appearing);
 
-
+        if(tempIndex == 37) //can't run from the alchemist
+        {
+            runButton.setVisibility(View.INVISIBLE);
+        }
 
         switch (tempMap)
         {
